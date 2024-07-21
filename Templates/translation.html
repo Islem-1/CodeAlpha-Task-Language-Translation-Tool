@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Language Translation Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Language Translation Tool</h1>
+        <form method="POST">
+            <div class="language-selection-container">
+                <div class="form-group">
+                    <label for="source_language">Source Language:</label>
+                    <select id="source_language" name="source_language">
+                        <option value="" {% if source_language == "" %}selected{% endif %}>Seect Language</option>
+                        <option value="en" {% if source_language == "en" %}selected{% endif %}>English</option>
+                        <option value="es" {% if source_language == "es" %}selected{% endif %}>Spanish</option>
+                        <option value="fr" {% if source_language == "fr" %}selected{% endif %}>French</option>
+                        <option value="de" {% if source_language == "de" %}selected{% endif %}>German</option>
+                        <option value="zh" {% if source_language == "zh" %}selected{% endif %}>Chinese</option>
+                        <option value="ja" {% if source_language == "ja" %}selected{% endif %}>Japanese</option>
+                        <option value="ru" {% if source_language == "ru" %}selected{% endif %}>Russian</option>
+                        <option value="ar" {% if source_language == "ar" %}selected{% endif %}>Arabic</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="target_language">Target Language:</label>
+                    <select id="target_language" name="target_language">
+                        <option value="en" {% if target_language == "en" %}selected{% endif %}>English</option>
+                        <option value="es" {% if target_language == "es" %}selected{% endif %}>Spanish</option>
+                        <option value="fr" {% if target_language == "fr" %}selected{% endif %}>French</option>
+                        <option value="de" {% if target_language == "de" %}selected{% endif %}>German</option>
+                        <option value="zh" {% if target_language == "zh" %}selected{% endif %}>Chinese</option>
+                        <option value="ja" {% if target_language == "ja" %}selected{% endif %}>Japanese</option>
+                        <option value="ru" {% if target_language == "ru" %}selected{% endif %}>Russian</option>
+                        <option value="ar" {% if target_language == "ar" %}selected{% endif %}>Arabic</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+                </div>
+            </div>
+            <div class="translation-container">
+                <div class="translation-tile1">
+                    <textarea id="text" name="text" rows="5" placeholder="Enter text here">{{ request.form['text'] if request.form else '' }}</textarea>
+                </div>
+                <div class="arrow">
+                    <span>&#x21C6;</span>
+                </div>
+                <div class="translation-tile">
+                    {% if translated_text %}
+                        <p>{{ translated_text }}</p>
+                    {% else %}
+                        <p>Translated text...</p>
+                    {% endif %}
+                </div>
+            </div>
+            <button type="submit">Translate</button>
+        </form>
+    </div>
+</body>
+</html>
